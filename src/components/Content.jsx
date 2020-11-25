@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Card, Container, Divider, Header, Icon, Button, Dimmer, Loader } from 'semantic-ui-react';
-import { getNewsByCategory } from '../../redux/actions';
-import { connect } from 'react-redux';
 
-class Tecnologia extends Component {
+class Content extends Component {
   componentDidMount() {
-    this.props.onGet(3);
+    this.props.onGet(this.props.category);
   }
 
   render() {
@@ -28,6 +26,7 @@ class Tecnologia extends Component {
         </Container>
       );
     }
+
     if (!isLoading) {
       const extraButton = link => (
         <Button animated as='a' href={link} target='_blank' rel='noreferrer'>
@@ -43,10 +42,8 @@ class Tecnologia extends Component {
           <Divider hidden />
           <Header as='h2' icon textAlign='center'>
             <Icon name='computer' />
-            Tecnología
-            <Header.Subheader>
-              Enterate de lo que pasa en el mundo de la tecnología
-            </Header.Subheader>
+            Categoria Default
+            <Header.Subheader>Mensaje por definir</Header.Subheader>
           </Header>
           <Divider section />
 
@@ -67,16 +64,4 @@ class Tecnologia extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    news: state.news,
-    hasError: state.loadingError,
-    isLoading: state.loadingInProgress
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  onGet: category => dispatch(getNewsByCategory(category))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tecnologia);
+export default Content;

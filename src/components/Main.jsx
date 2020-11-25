@@ -2,10 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './routes/Home';
 import Tecnologia from './routes/Tecnologia';
-import Politica from './routes/Politica';
-import Deportes from './routes/Deportes';
-import Diseño from './routes/Diseño';
-import Internacionales from './routes/Internacionales';
+import Content from '../redux/containers/ContentContainer';
 
 function Main() {
   return (
@@ -13,10 +10,22 @@ function Main() {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/tecnologia' component={Tecnologia} />
-        <Route path='/politica' component={Politica} />
-        <Route path='/deportes' component={Deportes} />
-        <Route path='/diseno' component={Diseño} />
-        <Route path='/internacionales' component={Internacionales} />
+        <Route
+          path='/politica'
+          key='politica'
+          render={props => <Content {...props} category={1} />}
+        />
+        <Route
+          path='/deportes'
+          key='deportes'
+          render={props => <Content {...props} category={5} />}
+        />
+        <Route path='/diseno' key='diseno' render={props => <Content {...props} category={6} />} />
+        <Route
+          path='/internacionales'
+          key='internacionales'
+          render={props => <Content {...props} category={2} />}
+        />
       </Switch>
     </main>
   );
