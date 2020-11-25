@@ -37,3 +37,29 @@ export const getNewsByCategory = category => {
       .catch(() => dispatch(loadingError(true)));
   };
 };
+
+export const getLatestNews = () => {
+  return dispatch => {
+    dispatch(clearNews());
+
+    dispatch(loadingError(false));
+
+    dispatch(loadingInProgress(true));
+
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth();
+    let day = today.getDate();
+
+    fetch(`https://api.canillitapp.com/latest/${year}-${month}-${day}?page=1`)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch(loadingInProgress(false));
+        return response.json();
+      })
+      .then(news => dispatch(loadingSuccess(news.slice(0, 10))))
+      .catch(() => dispatch(loadingError(true)));
+  };
+};

@@ -7,7 +7,7 @@ class Content extends Component {
   }
 
   render() {
-    const { news, hasError, isLoading } = this.props;
+    const { news, hasError, isLoading, title, subtitle, iconName } = this.props;
 
     if (hasError) {
       return (
@@ -41,9 +41,9 @@ class Content extends Component {
         <Container>
           <Divider hidden />
           <Header as='h2' icon textAlign='center'>
-            <Icon name='computer' />
-            Categoria Default
-            <Header.Subheader>Mensaje por definir</Header.Subheader>
+            <Icon name={iconName} />
+            {title}
+            <Header.Subheader>{subtitle}</Header.Subheader>
           </Header>
           <Divider section />
 
