@@ -7,6 +7,10 @@ import { setActiveItem, getNewsByWord } from '../redux/actions';
 class Header extends Component {
   state = { word: '' };
   handleChange = e => this.setState({ word: e.target.value });
+  handleClick = () => {
+    this.props.searchNews(this.state.word);
+    this.setState({ word: '' });
+  };
   render() {
     const { activeItem } = this.props;
 
@@ -65,12 +69,10 @@ class Header extends Component {
             <Input
               value={this.state.word}
               onChange={this.handleChange}
+              onKeyPress={e => e.key === 'Enter' && this.handleClick()}
               action={{
                 icon: 'search',
-                onClick: e => {
-                  this.props.searchNews(this.state.word);
-                  this.setState({ word: '' });
-                }
+                onClick: () => this.handleClick()
               }}
               placeholder='Buscar Noticias...'
             />
