@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Content from '../../components/Content';
-import { getNewsByCategory } from '../actions';
+import { getNewsByCategory, setActiveItem } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -11,7 +11,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onGet: category => dispatch(getNewsByCategory(category))
+  onGet: category => dispatch(getNewsByCategory(category)),
+  setActiveTab: name => dispatch(setActiveItem(name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -29,8 +29,18 @@ const news = (state = [], action) => {
   }
 };
 
+const activeItem = (state = 'home', action) => {
+  switch (action.type) {
+    case 'SET_ACTIVE_ITEM':
+      return action.name;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   news,
   loadingError,
-  loadingInProgress
+  loadingInProgress,
+  activeItem
 });

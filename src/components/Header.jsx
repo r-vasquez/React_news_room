@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Input } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { setActiveItem, getNewsByWord } from '../redux/actions';
 
 class Header extends Component {
-  state = { activeItem: 'home' };
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
+  state = { word: '' };
+  handleChange = e => this.setState({ word: e.target.value });
   render() {
-    const { activeItem } = this.state;
+    const { activeItem } = this.props;
 
     return (
       <Menu stackable>
@@ -17,7 +17,7 @@ class Header extends Component {
           to='/'
           name='home'
           active={activeItem === 'home'}
-          onClick={this.handleItemClick}>
+          onClick={this.props.setActive}>
           Home
         </Menu.Item>
         <Menu.Item
@@ -25,7 +25,7 @@ class Header extends Component {
           to='/tecnologia'
           name='tecnologia'
           active={activeItem === 'tecnologia'}
-          onClick={this.handleItemClick}>
+          onClick={this.props.setActive}>
           Tecnología
         </Menu.Item>
         <Menu.Item
@@ -33,7 +33,7 @@ class Header extends Component {
           to='/politica'
           name='politica'
           active={activeItem === 'politica'}
-          onClick={this.handleItemClick}>
+          onClick={this.props.setActive}>
           Política
         </Menu.Item>
         <Menu.Item
@@ -41,7 +41,7 @@ class Header extends Component {
           to='/deportes'
           name='deportes'
           active={activeItem === 'deportes'}
-          onClick={this.handleItemClick}>
+          onClick={this.props.setActive}>
           Deportes
         </Menu.Item>
         <Menu.Item
@@ -49,7 +49,7 @@ class Header extends Component {
           to='/diseno'
           name='diseno'
           active={activeItem === 'diseno'}
-          onClick={this.handleItemClick}>
+          onClick={this.props.setActive}>
           Diseño
         </Menu.Item>
         <Menu.Item
@@ -57,21 +57,39 @@ class Header extends Component {
           to='/internacionales'
           name='internacionales'
           active={activeItem === 'internacionales'}
-          onClick={this.handleItemClick}>
+          onClick={this.props.setActive}>
           Internacionales
         </Menu.Item>
         <Menu.Menu position='right'>
-          <div className='ui right aligned category search item'>
-            <div className='ui transparent icon input'>
-              <input className='prompt' type='text' placeholder='Buscar noticias...' />
-              <i className='search link icon' />
-            </div>
-            <div className='results' />
-          </div>
+          <Menu.Item>
+            <Input
+              value={this.state.word}
+              onChange={this.handleChange}
+              action={{
+                icon: 'search',
+                onClick: e => {
+                  this.props.searchNews(this.state.word);
+                  this.setState({ word: '' });
+                }
+              }}
+              placeholder='Buscar Noticias...'
+            />
+          </Menu.Item>
         </Menu.Menu>
       </Menu>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    activeItem: state.activeItem
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setActive: (e, { name }) => dispatch(setActiveItem(name)),
+  searchNews: word => dispatch(getNewsByWord(word))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

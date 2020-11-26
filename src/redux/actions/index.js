@@ -17,6 +17,11 @@ export const loadingSuccess = news => ({
   news
 });
 
+export const setActiveItem = active => ({
+  type: 'SET_ACTIVE_ITEM',
+  name: active
+});
+
 export const getNewsByCategory = category => {
   return dispatch => {
     dispatch(clearNews());
@@ -61,5 +66,28 @@ export const getLatestNews = () => {
       })
       .then(news => dispatch(loadingSuccess(news.slice(0, 10))))
       .catch(() => dispatch(loadingError(true)));
+  };
+};
+
+export const getNewsByWord = word => {
+  return dispatch => {
+    if (word !== '') {
+      dispatch(clearNews());
+
+      dispatch(loadingError(false));
+
+      dispatch(loadingInProgress(true));
+
+      fetch(`https://api.canillitapp.com/search/${word}`)
+        .then(response => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          dispatch(loadingInProgress(false));
+          return response.json();
+        })
+        .then(news => dispatch(loadingSuccess(news.slice(0, 10))))
+        .catch(() => dispatch(loadingError(true)));
+    }
   };
 };

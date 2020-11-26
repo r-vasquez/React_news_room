@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import { Card, Container, Divider, Header, Icon, Button, Dimmer, Loader } from 'semantic-ui-react';
+import {
+  Card,
+  Container,
+  Divider,
+  Header,
+  Icon,
+  Button,
+  Dimmer,
+  Loader,
+  Message
+} from 'semantic-ui-react';
 
 class Content extends Component {
   componentDidMount() {
     this.props.onGet(this.props.category);
+    this.props.setActiveTab(this.props.tabName);
   }
 
   render() {
@@ -11,9 +22,14 @@ class Content extends Component {
 
     if (hasError) {
       return (
-        <div>
-          <h6>Error al buscar las noticias.</h6>
-        </div>
+        <Message negative icon>
+          <Icon name='warning' />
+          <Message.Content>
+            <Message.Header>Error al cargar las noticias</Message.Header>
+            Por favor recarga la página o ponte en contacto con el administrador de la
+            página
+          </Message.Content>
+        </Message>
       );
     }
 
