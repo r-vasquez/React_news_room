@@ -15,7 +15,7 @@ class Header extends Component {
     const { activeItem } = this.props;
 
     return (
-      <Menu stackable>
+      <Menu stackable inverted>
         <Menu.Item
           as={Link}
           to='/'
