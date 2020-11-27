@@ -6,6 +6,10 @@ Small preview of the page:
 
 ![preview](public/sample.png)
 
+The app display a list of news in Card components with link to view the full content, a list of categories and a search bar to search news given a keyword.
+
+The data is fetched from https://api.canillitapp.com and you can check the canillita source code [here](https://github.com/Canillitapp/headlines-api).
+
 ## Stack Used
 
 - React (Bootstraped with [Create React App](https://github.com/facebook/create-react-app))
