@@ -1,42 +1,8 @@
 import { combineReducers } from 'redux';
-
-const loadingError = (state = false, action) => {
-  switch (action.type) {
-    case 'LOADING_ERROR':
-      return action.hasErrored;
-    default:
-      return state;
-  }
-};
-
-const loadingInProgress = (state = false, action) => {
-  switch (action.type) {
-    case 'LOADING_IN_PROGRESS':
-      return action.isLoading;
-    default:
-      return state;
-  }
-};
-
-const news = (state = [], action) => {
-  switch (action.type) {
-    case 'LOADING_SUCCESS':
-      return action.news;
-    case 'CLEAR_NEWS':
-      return [];
-    default:
-      return state;
-  }
-};
-
-const activeItem = (state = 'home', action) => {
-  switch (action.type) {
-    case 'SET_ACTIVE_ITEM':
-      return action.name;
-    default:
-      return state;
-  }
-};
+import { news } from './newsReducer';
+import { loadingError } from './loadingErrorReducer';
+import { activeItem } from './activeItemReducer';
+import { loadingInProgress } from './loadingInProgressReducer';
 
 export default combineReducers({
   news,
