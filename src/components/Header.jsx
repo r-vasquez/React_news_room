@@ -19,6 +19,7 @@ class Header extends Component {
         <Menu.Item
           as={Link}
           to='/'
+          role='link'
           name='home'
           active={activeItem === 'home'}
           onClick={this.props.setActive}>
@@ -27,6 +28,7 @@ class Header extends Component {
         <Menu.Item
           as={Link}
           to='/tecnologia'
+          role='link'
           name='tecnologia'
           active={activeItem === 'tecnologia'}
           onClick={this.props.setActive}>
@@ -35,6 +37,7 @@ class Header extends Component {
         <Menu.Item
           as={Link}
           to='/politica'
+          role='link'
           name='politica'
           active={activeItem === 'politica'}
           onClick={this.props.setActive}>
@@ -43,6 +46,7 @@ class Header extends Component {
         <Menu.Item
           as={Link}
           to='/deportes'
+          role='link'
           name='deportes'
           active={activeItem === 'deportes'}
           onClick={this.props.setActive}>
@@ -51,6 +55,7 @@ class Header extends Component {
         <Menu.Item
           as={Link}
           to='/diseno'
+          role='link'
           name='diseno'
           active={activeItem === 'diseno'}
           onClick={this.props.setActive}>
@@ -59,6 +64,7 @@ class Header extends Component {
         <Menu.Item
           as={Link}
           to='/internacionales'
+          role='link'
           name='internacionales'
           active={activeItem === 'internacionales'}
           onClick={this.props.setActive}>

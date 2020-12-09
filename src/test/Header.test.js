@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
 import * as React from 'react';
-import { render as rtlRender, screen } from '@testing-library/react';
+import { getByRole, render as rtlRender, screen } from '@testing-library/react';
 import Header from '../components/Header.jsx';
 import { activeItem } from '../redux/reducers/activeItemReducer';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const initialReducerState = { state: 'home' };
+const initialReducerState = { activeItem: 'home' };
 
 const render = (
   ui,
@@ -29,7 +29,9 @@ const render = (
 };
 
 test('home is active by default', () => {
-  render(<Header />);
+  const { container } = render(<Header />);
 
+  const homeLink = getByRole(container, 'link', { name: /home/i });
   expect(screen.getByText('Home')).toBeInTheDocument();
+  expect(homeLink).toHaveClass('active');
 });
